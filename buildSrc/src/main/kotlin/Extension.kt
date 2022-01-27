@@ -5,7 +5,9 @@ object Extension{
             add("kapt", dependency)
         }
     }
-
+    fun DependencyHandler.implementation(name : Any) {
+        add("implementation",name)
+    }
 
     fun DependencyHandler.implementationList(list: List<String>) {
         list.forEach { dependency ->
@@ -24,5 +26,6 @@ object Extension{
             add("testImplementation", dependency)
         }
     }
+
 
 }

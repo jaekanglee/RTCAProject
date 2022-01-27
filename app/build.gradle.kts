@@ -1,5 +1,6 @@
-import app.*
-import common.*
+import Extension.implementationList
+import Extension.kaptList
+import common.Versions
 import java.util.*
 
 plugins {
@@ -7,7 +8,7 @@ plugins {
     id(GradlePluginId.kotlinAndroid)
     id(GradlePluginId.kotlinKapt)
     id(GradlePluginId.kotlinAndroidExtensions)
-    //id(GradlePluginId.hilt)
+    id(GradlePluginId.hilt)
 }
 
 //val releaseKeystoreFile = file("${projectDir}/dentiKey.jks")
@@ -115,6 +116,12 @@ android {
 
 dependencies {
 
-    //(ProjectDependenciesZip.AndroidLibList)
+    implementationList(ProjectDependenciesZip.AndroidLibList)
+    implementationList(ProjectDependenciesZip.HiltDependencies)
+    kaptList(ProjectDependenciesZip.HiltLibraryKapt)
+
+
+    implementation(project(app.ModuleGraph.data))
+    implementation(project(app.ModuleGraph.domain))
 
 }

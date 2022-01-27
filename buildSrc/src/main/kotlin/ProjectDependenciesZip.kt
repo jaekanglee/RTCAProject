@@ -25,7 +25,7 @@ object ProjectDependenciesZip {
 
 
 
-    val HiltThirdPartyDependencies =
+    val HiltDependencies =
         ArrayList<String>().apply {
             add(AndroidDependencies.hilt)
             add(AndroidDependencies.hiltCore)
