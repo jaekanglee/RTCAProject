@@ -28,5 +28,5 @@ object Versions {
     const val flexBox = "2.0.1"
 
     const val hiltCore = "2.40.5"
-    const val hiltAndroidX = "1.0.0"
+    const val hiltAndroidX = "1.0.0-alpha03"
 }

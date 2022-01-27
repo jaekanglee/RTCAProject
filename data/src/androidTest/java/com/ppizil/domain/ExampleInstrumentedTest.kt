@@ -1,4 +1,4 @@
-package com.ppizil.rtca
+package com.ppizil.data
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

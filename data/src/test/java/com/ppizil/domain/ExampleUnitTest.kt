@@ -1,4 +1,4 @@
-package com.ppizil.rtca
+package com.ppizil.data
 
 import org.junit.Test
 

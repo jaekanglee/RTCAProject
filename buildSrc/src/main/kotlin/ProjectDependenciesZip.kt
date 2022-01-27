@@ -14,7 +14,6 @@ object ProjectDependenciesZip {
             add(AndroidDependencies.lifecycleExtensions)
             add(AndroidDependencies.lifecycleLiveData)
             add(AndroidDependencies.lifecycleRunTime)
-            add(AndroidDependencies.fragment)
             add(AndroidDependencies.recyclerView)
 
             add(AndroidDependencies.navigationRuntimeKtx)

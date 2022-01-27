@@ -1,7 +1,7 @@
 import common.Versions
 
 object AppConfig {
-    const val id = "com.kaii.dentii"
+    const val id = "com.ppizil.rtcaapp"
 
     //버전 코드 기준 -> 1씩 추가
     const val versionCode = 1
