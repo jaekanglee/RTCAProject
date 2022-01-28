@@ -26,6 +26,6 @@
 rootProject.name = "RtcaApp"
 include(
     ":app",
-    ":domain",
-    ":data"
+    ":2_domain",
+    ":3_data"
 )
