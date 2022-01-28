@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 
-abstract class BaseViewModel : ViewModel() {
+abstract class BaseViewModel<S : BaseState> : ViewModel() {
 
     private val _progressVisibleState = MutableLiveData(View.GONE)
     val progressVisibleState: LiveData<Int>
@@ -28,7 +28,6 @@ abstract class BaseViewModel : ViewModel() {
     }
 
 
-
     private val _toastMsg = MutableLiveData<Event<Any>>()
     val toastMsg: LiveData<Event<Any>>
         get() = _toastMsg
@@ -46,7 +45,7 @@ abstract class BaseViewModel : ViewModel() {
 
     fun setException(e: Throwable) {
         setProgressVisibleState(false)
-        _exception.value= Event(e)
+        _exception.value = Event(e)
     }
 
     fun isOnlyNullCheck(vararg items: Any?) {
