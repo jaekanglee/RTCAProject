@@ -4,8 +4,10 @@ import com.ppizil.data.model.EventDataModel
 import kotlinx.coroutines.flow.Flow
 
 interface EventSource {
-     fun getEventList(): Flow<List<EventDataModel>>
+     fun getEventList(): List<EventDataModel>
 
-     fun insertEventItem(item: EventDataModel)
+     fun getEventItem(id : Long) : EventDataModel
+
+     fun insertEventItem(item: EventDataModel) : Long
 
 }

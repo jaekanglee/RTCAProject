@@ -3,6 +3,8 @@ package com.ppizil.domain.di
 import com.ppizil.domain.repository.EventRepository
 import com.ppizil.domain.usecase.EventInsertUsecase
 import com.ppizil.domain.usecase.EventInsertUsecaseImpl
+import com.ppizil.domain.usecase.FetchEventsUsecase
+import com.ppizil.domain.usecase.FetchEventsUsecaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,4 +17,8 @@ object UsecaseModule {
     @Provides
     fun provideEventInsertUsecase(repo: EventRepository): EventInsertUsecase =
         EventInsertUsecaseImpl(repo)
+
+    @Provides
+    fun provideFetchEventUsecase(repo: EventRepository): FetchEventsUsecase =
+        FetchEventsUsecaseImpl(repo)
 }

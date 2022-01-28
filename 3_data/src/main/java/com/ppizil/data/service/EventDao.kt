@@ -11,9 +11,12 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface EventDao {
     @Query("SELECT * FROM eventModel")
-    fun getEventList(): Flow<List<EventDataModel>>
+    fun getEventList(): List<EventDataModel>
+
+    @Query("SELECT * FROM eventModel WHERE eventModel.id = :id ")
+    fun getEventItem(id : Long) : EventDataModel
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertEventItem(item: EventDataModel)
+    fun insertEventItem(item: EventDataModel) : Long
 
 }

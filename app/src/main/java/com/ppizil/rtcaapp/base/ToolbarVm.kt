@@ -3,7 +3,7 @@ package com.ppizil.rtcaapp.base
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.ppizil.rtcaapp.R
+import com.ppizil.rtcaapp.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

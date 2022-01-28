@@ -4,16 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.ppizil.rtcaapp.R
-import org.xml.sax.ErrorHandler
+import com.ppizil.rtcaapp.utils.getCurrentMethodName
+import com.ppizil.rtcaapp.utils.makeLog
 
 abstract class BaseFragment<T : ViewDataBinding, S : BaseState>(@LayoutRes private val resId: Int) : Fragment() {
 
@@ -39,8 +37,6 @@ abstract class BaseFragment<T : ViewDataBinding, S : BaseState>(@LayoutRes priva
     abstract fun bindView()
     abstract fun setObserver()
     abstract fun initData()
-
-    abstract fun onState(newState: S)
 
 
     fun goDestinationFragment(destinationId: Int) {

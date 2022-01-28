@@ -52,7 +52,6 @@ abstract class BaseActivity<T : ViewDataBinding, S : BaseState>(@LayoutRes priva
     abstract fun setObserver()
     abstract fun initData()
 
-    abstract fun onState(newState: S)
 
     fun toastMsg(msg: Any?) {
         msg?.let {

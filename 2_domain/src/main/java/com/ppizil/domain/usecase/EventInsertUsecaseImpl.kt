@@ -8,7 +8,7 @@ class EventInsertUsecaseImpl @Inject constructor(
     private val eventRepository: EventRepository
 ) : EventInsertUsecase {
 
-    override fun insertEventItem(item: EventDomainModel) {
+    override fun insertEventItem(item: EventDomainModel)  {
         eventRepository.insertEventItem(item)
     }
 

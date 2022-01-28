@@ -1,4 +1,4 @@
-package com.ppizil.rtcaapp.base
+package com.ppizil.rtcaapp.utils
 
 
 open class Event<out T>(private val content: T) {

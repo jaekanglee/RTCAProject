@@ -1,48 +1,56 @@
 package com.ppizil.rtcaapp.main
 
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.viewModelScope
 import com.ppizil.domain.usecase.EventInsertUsecase
+import com.ppizil.domain.usecase.FetchEventsUsecase
 import com.ppizil.rtcaapp.base.BaseViewModel
-import com.ppizil.rtcaapp.base.Event
-import com.ppizil.rtcaapp.base.getCurrentMethodName
-import com.ppizil.rtcaapp.base.makeLog
-import com.ppizil.rtcaapp.main.model.SavingModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val eventInsertUsercase: EventInsertUsecase
+    private val eventInsertUsecase: EventInsertUsecase,
+    private val fetchEventUsecase: FetchEventsUsecase
 ) : BaseViewModel<MainViewState>(), SavingHolderAction {
 
-    init {
-        makeLog(getCurrentMethodName(), "Test")
-    }
-
-
-    private val _savingContentsList = MutableLiveData<Event<ArrayList<SavingModel>>>()
-    val savingContentsList: LiveData<Event<List<SavingModel>>>
-        get() = Transformations.map(_savingContentsList) {
-            it
-        }
+    private val _uiState = MutableStateFlow<MainViewState>(MainViewState.LOADING)
+    val uiState: StateFlow<MainViewState>
+        get() = _uiState
 
 
     init {
-        SavingModel(
-            id = 1,
-            title = "Test"
-        ).run {
-            ArrayList<SavingModel>().apply {
-                add(this@run)
-                _savingContentsList.value = Event(this)
-            }
-        }
+        fetchEventLIstAll()
     }
+
 
     override fun getItemListCount(): Int? {
-        return savingContentsList.value?.peekContent()?.count()
+        return null
     }
+
+    fun fetchEventLIstAll() {
+        viewModelScope.launch {
+            fetchEventUsecase.fetchEventListAll()
+                .map {
+                    it.map {
+                        it.mapToPResent()
+                    }
+                }
+                .collect {
+                    _uiState.value = MainViewState.SUCCESS(it)
+                }
+        }
+    }
+
+
+    fun clickAddingButton() {
+        _uiState.value = MainViewState.ADDING
+    }
+
 }

@@ -5,6 +5,11 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.ppizil.rtcaapp.utils.Event
+import com.ppizil.rtcaapp.utils.getCurrentMethodName
+import com.ppizil.rtcaapp.utils.makeLog
+import kotlinx.coroutines.cancel
 
 
 abstract class BaseViewModel<S : BaseState> : ViewModel() {
@@ -119,6 +124,11 @@ abstract class BaseViewModel<S : BaseState> : ViewModel() {
             }
         }
 
+    }
+
+    override fun onCleared() {
+        viewModelScope.cancel()
+        super.onCleared()
     }
 }
 

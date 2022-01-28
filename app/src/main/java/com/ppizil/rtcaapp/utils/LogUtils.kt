@@ -1,4 +1,4 @@
-package com.ppizil.rtcaapp.base
+package com.ppizil.rtcaapp.utils
 
 import android.util.Log
 import com.ppizil.rtcaapp.BuildConfig

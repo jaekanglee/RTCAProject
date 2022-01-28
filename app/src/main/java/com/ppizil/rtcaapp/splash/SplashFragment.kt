@@ -31,7 +31,4 @@ class SplashFragment : BaseFragment<FragmentSplashBinding,SplashState>(R.layout.
         }, 1000)
     }
 
-    override fun onState(newState: SplashState) {
-
-    }
 }
