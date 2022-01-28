@@ -11,7 +11,9 @@
 
         <action
             android:id="@+id/action_fragment_splash_to_fragment_main"
-            app:destination="@id/fragment_main" />
+            app:destination="@id/fragment_main"
+            app:popUpTo="@id/fragment_splash"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
