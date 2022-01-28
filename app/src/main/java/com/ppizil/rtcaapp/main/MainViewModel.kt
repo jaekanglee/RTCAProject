@@ -5,12 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.ppizil.domain.usecase.EventInsertUsecase
 import com.ppizil.domain.usecase.FetchEventsUsecase
 import com.ppizil.rtcaapp.base.BaseViewModel
+import com.ppizil.rtcaapp.utils.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,8 +18,8 @@ class MainViewModel @Inject constructor(
     private val fetchEventUsecase: FetchEventsUsecase
 ) : BaseViewModel<MainViewState>(), SavingHolderAction {
 
-    private val _uiState = MutableStateFlow<MainViewState>(MainViewState.LOADING)
-    val uiState: StateFlow<MainViewState>
+    private val _uiState = MutableSharedFlow<Event<MainViewState>>()
+    val uiState: MutableSharedFlow<Event<MainViewState>>
         get() = _uiState
 
 
@@ -43,14 +41,15 @@ class MainViewModel @Inject constructor(
                     }
                 }
                 .collect {
-                    _uiState.value = MainViewState.SUCCESS(it)
+                    _uiState.emit(Event(MainViewState.SUCCESS(it)))
                 }
         }
     }
 
 
-    fun clickAddingButton() {
-        _uiState.value = MainViewState.ADDING
+     fun clickAddingButton() {
+        viewModelScope.launch {
+            _uiState.emit(Event(MainViewState.ADDING))
+        }
     }
-
 }

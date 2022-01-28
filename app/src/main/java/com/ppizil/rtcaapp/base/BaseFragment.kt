@@ -40,12 +40,7 @@ abstract class BaseFragment<T : ViewDataBinding, S : BaseState>(@LayoutRes priva
 
 
     fun goDestinationFragment(destinationId: Int) {
-        activity?.supportFragmentManager?.findFragmentById(R.id.nav_host_fragment_container)
-            ?.findNavController()?.let {
-                it.navigate(destinationId)
-            } ?: kotlin.run {
-            makeLog(getCurrentMethodName(), "NavController Not Found")
-        }
+        findNavController().navigate(destinationId)
     }
 
 
