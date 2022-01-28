@@ -1,14 +1,12 @@
-package com.ppizil.rtcaapp
+package com.ppizil.rtcaapp.splash
 
-import android.content.Intent
 import android.os.Handler
 import android.os.Looper
-import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
+import com.ppizil.rtcaapp.R
 import com.ppizil.rtcaapp.base.BaseFragment
 import com.ppizil.rtcaapp.databinding.FragmentSplashBinding
 
-class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_splash) {
+class SplashFragment : BaseFragment<FragmentSplashBinding,SplashState>(R.layout.fragment_splash) {
     override fun bindView() {
 
     }
@@ -26,5 +24,9 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_spl
         Handler(Looper.getMainLooper()).postDelayed({
             goDestinationFragment(R.id.fragment_main)
         }, 1000)
+    }
+
+    override fun onState(newState: SplashState) {
+
     }
 }
