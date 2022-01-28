@@ -13,7 +13,7 @@ object Versions {
     const val lifecycle = "2.4.0"
     const val recyclerview = "1.2.1"
     const val glide = "4.12.0"
-    const val room = "2.4.2"
+    const val room = "2.4.1"
     const val navigation = "2.3.1"
     const val fragmentVersion = "1.7.0"
     const val coroutine ="1.6.0"

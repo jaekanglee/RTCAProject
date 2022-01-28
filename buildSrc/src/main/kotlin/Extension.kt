@@ -1,12 +1,14 @@
 import org.gradle.api.artifacts.dsl.DependencyHandler
-object Extension{
+
+object Extension {
     fun DependencyHandler.kaptList(list: List<String>) {
         list.forEach { dependency ->
             add("kapt", dependency)
         }
     }
-    fun DependencyHandler.implementation(name : Any) {
-        add("implementation",name)
+
+    fun DependencyHandler.implementation(name: Any) {
+        add("implementation", name)
     }
 
     fun DependencyHandler.implementationList(list: List<String>) {
@@ -27,5 +29,12 @@ object Extension{
         }
     }
 
+    fun DependencyHandler.ksp(dependency: Any) {
+        add("ksp", dependency)
+    }
+
+    fun DependencyHandler.anotationProcessor(dependency: Any) {
+        add("annotationProcessor", dependency)
+    }
 
 }

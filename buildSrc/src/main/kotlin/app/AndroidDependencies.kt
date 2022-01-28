@@ -36,7 +36,6 @@ object AndroidDependencies {
     const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
     const val roomKapt = "androidx.room:room-compiler:${Versions.room}"
     const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
-    const val roomRx = "androidx.room:room-rxjava2:${Versions.room}"
 
     const val hilt = "com.google.dagger:hilt-android:${Versions.hiltCore}"
     const val hiltLifecycle = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hiltAndroidX}"

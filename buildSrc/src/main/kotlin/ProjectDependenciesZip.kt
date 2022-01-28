@@ -54,9 +54,7 @@ object ProjectDependenciesZip {
     val roomLibrary =
         ArrayList<String>().apply {
             add(AndroidDependencies.roomRuntime)
-            add(AndroidDependencies.roomKapt)
             add(AndroidDependencies.roomKtx)
-            add(AndroidDependencies.roomRx)
         }
 
 
