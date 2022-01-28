@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/fragment_splash"
-        android:name="com.ppizil.rtcaapp.SplashFragment"
+        android:name="com.ppizil.rtcaapp.splash.SplashFragment"
         tools:layout="@layout/fragment_splash">
 
         <action

@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.ppizil.rtcaapp.R
 import org.xml.sax.ErrorHandler
 
-abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val resId: Int) : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding, S : BaseState>(@LayoutRes private val resId: Int) : Fragment() {
 
     lateinit var binding: T
 
@@ -39,6 +39,8 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes private val resId: I
     abstract fun bindView()
     abstract fun setObserver()
     abstract fun initData()
+
+    abstract fun onState(newState: S)
 
 
     fun goDestinationFragment(destinationId: Int) {

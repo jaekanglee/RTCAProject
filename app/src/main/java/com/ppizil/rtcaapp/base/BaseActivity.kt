@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.ppizil.rtcaapp.R
 
 
-abstract class BaseActivity<T : ViewDataBinding>(@LayoutRes private val resId: Int) :
+abstract class BaseActivity<T : ViewDataBinding, S : BaseState>(@LayoutRes private val resId: Int) :
     AppCompatActivity() {
 
     var isActiveNetword: Boolean = true
@@ -52,6 +52,7 @@ abstract class BaseActivity<T : ViewDataBinding>(@LayoutRes private val resId: I
     abstract fun setObserver()
     abstract fun initData()
 
+    abstract fun onState(newState: S)
 
     fun toastMsg(msg: Any?) {
         msg?.let {

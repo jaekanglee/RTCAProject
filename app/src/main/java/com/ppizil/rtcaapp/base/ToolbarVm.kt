@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class ToolbarVmImpl @Inject constructor() : BaseViewModel(), ToolbarVm {
+class ToolbarVmImpl @Inject constructor() : BaseViewModel<ToolbarState>(), ToolbarVm {
 
     private val _titleValue = MutableLiveData<String>()
     val titleValue: LiveData<String>
@@ -143,4 +143,10 @@ interface ToolbarVm {
     fun setRigthMenuIncon(id:Int)
     fun setVisibleStateToolbar(state:Boolean)
     fun setTitleTextColor(colorId : Int)
+}
+
+
+sealed class ToolbarState : BaseState {
+    object SHOW : ToolbarState()
+    object HID : ToolbarState()
 }
