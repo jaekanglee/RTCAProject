@@ -1,4 +1,4 @@
-package com.ppizil.domain
+package com.ppizil.data
 
 import org.junit.Test
 
