@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.ppizil.domain.usecase.EventInsertUsecase
 import com.ppizil.domain.usecase.FetchEventsUsecase
 import com.ppizil.rtcaapp.base.BaseViewModel
-import com.ppizil.rtcaapp.utils.Event
+import com.ppizil.rtcaapp.utils.MutableEventFlow
+import com.ppizil.rtcaapp.utils.asEventFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,9 +18,8 @@ class MainViewModel @Inject constructor(
     private val fetchEventUsecase: FetchEventsUsecase
 ) : BaseViewModel<MainViewState>(), SavingHolderAction {
 
-    private val _uiState = MutableSharedFlow<Event<MainViewState>>()
-    val uiState: MutableSharedFlow<Event<MainViewState>>
-        get() = _uiState
+    private val _uiState = MutableEventFlow<MainViewState>()
+    val uiState = _uiState.asEventFlow()
 
 
     init {
@@ -41,15 +40,15 @@ class MainViewModel @Inject constructor(
                     }
                 }
                 .collect {
-                    _uiState.emit(Event(MainViewState.SUCCESS(it)))
+                    _uiState.emit(MainViewState.SUCCESS(it))
                 }
         }
     }
 
 
-     fun clickAddingButton() {
+    fun clickAddingButton() {
         viewModelScope.launch {
-            _uiState.emit(Event(MainViewState.ADDING))
+            _uiState.emit(MainViewState.ADDING)
         }
     }
 }
