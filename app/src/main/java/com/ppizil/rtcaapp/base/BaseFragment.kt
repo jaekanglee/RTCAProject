@@ -8,12 +8,15 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.ppizil.rtcaapp.R
-import com.ppizil.rtcaapp.utils.getCurrentMethodName
-import com.ppizil.rtcaapp.utils.makeLog
+import com.ppizil.rtcaapp.MainActicityState
+import com.ppizil.rtcaapp.MainActivityVm
 
-abstract class BaseFragment<T : ViewDataBinding, S : BaseState>(@LayoutRes private val resId: Int) : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding, S : BaseState>(@LayoutRes private val resId: Int) :
+    Fragment() {
+
+    private val activityViewModel: MainActivityVm by activityViewModels()
 
     lateinit var binding: T
 
@@ -46,5 +49,9 @@ abstract class BaseFragment<T : ViewDataBinding, S : BaseState>(@LayoutRes priva
 
     fun setViewModelLifecycle() {
         binding.lifecycleOwner = this
+    }
+
+    fun setActivityUiState(state: MainActicityState) {
+        activityViewModel.setUiState(state)
     }
 }
