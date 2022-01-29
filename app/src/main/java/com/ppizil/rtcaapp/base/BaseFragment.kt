@@ -41,12 +41,6 @@ abstract class BaseFragment<T : ViewDataBinding, S : BaseState>(@LayoutRes priva
     abstract fun setObserver()
     abstract fun initData()
 
-
-    fun goDestinationFragment(destinationId: Int) {
-        findNavController().navigate(destinationId)
-    }
-
-
     fun setViewModelLifecycle() {
         binding.lifecycleOwner = this
     }
@@ -55,3 +49,8 @@ abstract class BaseFragment<T : ViewDataBinding, S : BaseState>(@LayoutRes priva
         activityViewModel.setUiState(state)
     }
 }
+
+fun Fragment.goDestinationFragment(destinationId: Int) {
+    findNavController().navigate(destinationId)
+}
+

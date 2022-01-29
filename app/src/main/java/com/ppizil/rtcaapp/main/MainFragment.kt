@@ -7,6 +7,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.ppizil.rtcaapp.R
 import com.ppizil.rtcaapp.base.BaseFragment
+import com.ppizil.rtcaapp.base.goDestinationFragment
 import com.ppizil.rtcaapp.databinding.FragmentMainBinding
 import com.ppizil.rtcaapp.utils.makeLog
 import com.ppizil.rtcaapp.utils.repeatOnStarted
@@ -47,7 +48,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewState>(R.layout.f
                         adapter.submitList(state.list)
                     }
                     is MainViewState.ADDING -> {
-                        findNavController().navigate(R.id.action_fragment_main_to_fragment_saving)
+                        goDestinationFragment(R.id.action_fragment_main_to_fragment_saving)
                     }
                     is MainViewState.CLICK -> {
 

@@ -2,13 +2,15 @@ package com.ppizil.rtcaapp.splash
 
 import android.os.Handler
 import android.os.Looper
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.ppizil.rtcaapp.R
 import com.ppizil.rtcaapp.base.BaseFragment
+import com.ppizil.rtcaapp.base.goDestinationFragment
 import com.ppizil.rtcaapp.databinding.FragmentSplashBinding
 
 
-class SplashFragment : BaseFragment<FragmentSplashBinding,SplashState>(R.layout.fragment_splash) {
+class SplashFragment : BaseFragment<FragmentSplashBinding, SplashState>(R.layout.fragment_splash) {
     override fun bindView() {
 
     }
@@ -23,11 +25,10 @@ class SplashFragment : BaseFragment<FragmentSplashBinding,SplashState>(R.layout.
     }
 
 
-    fun startNextMainpage(){
+    fun startNextMainpage() {
 
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_fragment_splash_to_fragment_main)
-            ////goDestinationFragment(R.id.action_fragment_splash_to_fragment_main)
+            goDestinationFragment(R.id.action_fragment_splash_to_fragment_main)
         }, 1000)
     }
 
