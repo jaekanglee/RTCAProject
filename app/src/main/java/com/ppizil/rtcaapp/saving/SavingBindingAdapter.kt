@@ -7,9 +7,12 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.forEachIndexed
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
 import com.ppizil.rtcaapp.R
 import com.ppizil.rtcaapp.databinding.ComponentSavingEdittextBinding
+import com.ppizil.rtcaapp.main.setMainSavingAdapter
 import com.ppizil.rtcaapp.utils.makeLog
 
 
@@ -18,19 +21,15 @@ fun onActionPlusBtn(imageView: ImageView, savingViewModel: SavingViewModel?) {
     savingViewModel ?: return
     imageView.setOnClickListener {
         try {
-            val count = savingViewModel.peopleCount()
+
             val parentViewGroup = (imageView.parent as ViewGroup)
             parentViewGroup.run {
                 findViewById<LinearLayout>(R.id.lv_group)?.let { viewGroup ->
                     createPeopleNameView(viewGroup, savingViewModel).run {
-                        this.tag = "${(count - 1)}"
-                        viewGroup.addView(this)
                         savingViewModel.onClickPeplePlus()
+                        viewGroup.addView(this)
                     }
                 }
-//            findViewById<TextView>(R.id.tv_people_count)?.let {
-//                it.text = "${count}명"
-//            }
             }
         } catch (e: Exception) {
             e.localizedMessage.makeLog(null)
@@ -48,6 +47,7 @@ fun createPeopleNameView(parentView: ViewGroup, savingViewModel: SavingViewModel
             false
         ).apply {
             this.viewModel = savingViewModel
+            onChangeUserName(etName, savingViewModel)
         }.root
 }
 
@@ -56,11 +56,41 @@ fun onClickDeleteBtn(imageView: ImageView, viewModel: SavingViewModel?) {
     viewModel ?: return
     imageView.setOnClickListener {
         (imageView.parent as ViewGroup).let { rootView ->
-            rootView.tag?.toString()?.toInt()?.let {
-                viewModel.onClickDeletePeople(it)
-                val rootContainerViewGrouop = rootView.parent as ViewGroup
-                rootContainerViewGrouop.removeView(rootView)
-            }
+            val rootContainerViewGrouop = rootView.parent as ViewGroup
+            val childPos = rootContainerViewGrouop.indexOfChild(rootView)
+            rootContainerViewGrouop.removeView(rootView)
+            viewModel.onClickDeletePeople(childPos)
         }
+    }
+}
+
+@BindingAdapter("bind:onChangeGroupName")
+fun onChangeGroupName(editText: EditText, viewModel: SavingViewModel?) {
+    viewModel ?: return
+
+
+    editText.doOnTextChanged { text, _, _, _ ->
+        viewModel.inputGroupName(text.toString())
+    }
+}
+
+@BindingAdapter("bind:onChangeTotalMoney")
+fun onChangeTotalMoney(editText: EditText, viewModel: SavingViewModel?) {
+    viewModel ?: return
+
+    editText.doOnTextChanged { text, _, _, _ ->
+        viewModel.inputTotalMoney(text.toString())
+    }
+}
+
+fun onChangeUserName(editText: EditText, viewModel: SavingViewModel) {
+
+
+
+    editText.doOnTextChanged { text, _, _, _ ->
+        val parentViewGroup = editText.parent as ViewGroup
+        val parentLinearLayout = parentViewGroup.parent as ViewGroup
+        val currentFieldPosition = parentLinearLayout.indexOfChild(parentViewGroup)
+        viewModel.inputUserName(text.toString(), currentFieldPosition)
     }
 }

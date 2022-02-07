@@ -1,53 +1,62 @@
 package com.ppizil.rtcaapp.saving
 
 import com.ppizil.rtcaapp.base.BaseViewModel
+import com.ppizil.rtcaapp.utils.makeLog
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class SavingVM : BaseViewModel<SavingState>(), SavingViewModel {
+
+    private val _peopleList = MutableStateFlow(ArrayList<String>())
+    val peopleList: StateFlow<List<String>>
+        get() = _peopleList
+
     private val _peopleCount = MutableStateFlow(0)
     val peopleCount: StateFlow<Int>
         get() = _peopleCount
 
 
-    private val _pepleNameList = MutableStateFlow(ArrayList<String>())
-    val pepleNampepleNameList: StateFlow<List<String>>
-        get() = _pepleNameList
+    private val _groupName = MutableStateFlow<String?>(null)
+    val groupName: StateFlow<String?>
+        get() = _groupName
+
+
+    private val _totalMoney = MutableStateFlow<String?>(null)
+    val totalMoney: StateFlow<String?>
+        get() = _totalMoney
 
 
     override fun onClickPeplePlus() {
-        val count = _peopleCount.value + 1
-        _peopleCount.value = count
-        addNameItemFromNameList()
+        _peopleList.value.add("")
+        syncPeopleCount()
     }
 
-    fun addNameItemFromNameList() {
-        _pepleNameList.value.run {
-            add("Test")
-            _pepleNameList.value = this
-        }
-    }
 
-    fun deleteNameItemFromNameList(index : Int){
-        _pepleNameList.value.run {
-            removeAt(index)
-            _pepleNameList.value = this
-        }
+    fun syncPeopleCount() {
+        _peopleCount.value = _peopleList.value.size
     }
 
     override fun onClickDeletePeople(index: Int) {
-        val count = _peopleCount.value
-        if (count > 0) {
-            _peopleCount.value = count - 1
-        }
-        deleteNameItemFromNameList(index)
+        _peopleList.value.removeAt(index)
+        syncPeopleCount()
     }
 
     override fun inputUserName(name: String, index: Int) {
-        TODO("Not yet implemented")
+        _peopleList.value.run {
+            removeAt(index)
+            add(index, name)
+            toString().makeLog(null)
+        }
+
     }
 
-    override fun peopleCount(): Int = peopleCount.value
+    override fun inputTotalMoney(money: String) {
+        _totalMoney.value = money
+    }
+
+    override fun inputGroupName(name: String) {
+        _groupName.value = name
+    }
 
 
 }
@@ -57,6 +66,7 @@ interface SavingViewModel {
     fun onClickPeplePlus()
     fun onClickDeletePeople(index: Int)
     fun inputUserName(name: String, index: Int)
-    fun peopleCount(): Int
+    fun inputTotalMoney(money: String)
+    fun inputGroupName(name: String)
 
 }

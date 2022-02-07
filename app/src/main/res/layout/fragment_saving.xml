@@ -47,6 +47,8 @@
             android:layout_marginStart="@dimen/dp_16"
             android:layout_marginEnd="@dimen/dp_16"
             android:hint="계모임 이름"
+            android:text="@{viewmodel.groupName}"
+            bind:onChangeGroupName="@{viewmodel}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +66,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@+id/et_name"
-            app:layout_constraintTop_toBottomOf="@+id/et_name"
+            app:layout_constraintTop_toBottomOf="@+id/et_total_period"
             app:layout_constraintVertical_bias="0" />
 
         <ImageView
@@ -78,10 +80,9 @@
             app:layout_constraintEnd_toEndOf="@id/tv_people_count"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toStartOf="@+id/tv_people_count"
-            app:layout_constraintTop_toBottomOf="@+id/et_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_people_count"
             app:layout_constraintVertical_bias="0.5"
-            bind:onActionPlusBtn="@{viewmodel}"
-            />
+            bind:onActionPlusBtn="@{viewmodel}" />
 
         <EditText
             android:id="@+id/et_total_money"
@@ -89,8 +90,9 @@
             android:hint="총 금액"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/et_name"
+            bind:onChangeTotalMoney="@{viewmodel}"
             app:layout_constraintStart_toStartOf="@+id/tv_people_count"
-            app:layout_constraintTop_toBottomOf="@+id/tv_people_count"
+            app:layout_constraintTop_toBottomOf="@+id/et_name"
             app:layout_constraintVertical_bias="0" />
 
         <EditText
@@ -108,11 +110,12 @@
             android:id="@+id/sv"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/cardview_dark_background"
+            android:background="@color/white"
+            android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_total_period">
+            app:layout_constraintTop_toBottomOf="@+id/tv_people_count">
 
             <LinearLayout
                 android:id="@+id/lv_group"
