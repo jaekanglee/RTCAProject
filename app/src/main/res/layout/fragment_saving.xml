@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.ppizil.rtcaapp.saving.SavingVM" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rootView"
@@ -39,48 +46,63 @@
             style="@style/et_saving"
             android:layout_marginStart="@dimen/dp_16"
             android:layout_marginEnd="@dimen/dp_16"
+            android:hint="계모임 이름"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tb_title"
-            app:layout_constraintVertical_bias="0"
-            android:hint="계모임 이름" />
+            app:layout_constraintVertical_bias="0" />
 
-        <EditText
-            android:id="@+id/et_people_count"
+        <TextView
+            android:id="@+id/tv_people_count"
             style="@style/et_saving"
-            android:layout_marginStart="@dimen/dp_16"
-            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_width="@dimen/dp_100"
+            android:gravity="center|left"
+            android:hint="인원수"
+            android:text="@{viewmodel.peopleCount + `명`}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/et_name"
             app:layout_constraintTop_toBottomOf="@+id/et_name"
-            app:layout_constraintVertical_bias="0"
-            android:hint="인원수" />
+            app:layout_constraintVertical_bias="0" />
+
+        <ImageView
+            android:id="@+id/bt_plus"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="@dimen/dp_10"
+            android:src="@drawable/plus"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_people_count"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/tv_people_count"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="@+id/tv_people_count"
+            app:layout_constraintTop_toBottomOf="@+id/et_name"
+            app:layout_constraintVertical_bias="0.5"
+            bind:onActionPlusBtn="@{viewmodel}"
+            />
 
         <EditText
             android:id="@+id/et_total_money"
             style="@style/et_saving"
-            android:layout_marginStart="@dimen/dp_16"
-            android:layout_marginEnd="@dimen/dp_16"
+            android:hint="총 금액"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_people_count"
-            app:layout_constraintVertical_bias="0"
-            android:hint="총 금액" />
+            app:layout_constraintEnd_toEndOf="@+id/et_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_people_count"
+            app:layout_constraintTop_toBottomOf="@+id/tv_people_count"
+            app:layout_constraintVertical_bias="0" />
 
         <EditText
             android:id="@+id/et_total_period"
             style="@style/et_saving"
-            android:layout_marginStart="@dimen/dp_16"
             android:layout_marginEnd="@dimen/dp_16"
+            android:hint="기간"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/et_total_money"
             app:layout_constraintTop_toBottomOf="@+id/et_total_money"
-            app:layout_constraintVertical_bias="0"
-            android:hint="기간" />
+            app:layout_constraintVertical_bias="0" />
 
         <ScrollView
             android:id="@+id/sv"
