@@ -59,6 +59,22 @@ class SavingVM : BaseViewModel<SavingState>(), SavingViewModel {
     }
 
 
+    fun saveRtcaInfo(){
+        checkValidField()
+    }
+
+    fun checkValidField(){
+        if(_groupName.value.isNullOrEmpty()){
+            "GroupName Error".makeLog(null)
+            return
+        }
+
+        if(_totalMoney.value.isNullOrEmpty()){
+            "Money Error".makeLog(null)
+            return
+        }
+
+    }
 }
 
 
@@ -68,5 +84,4 @@ interface SavingViewModel {
     fun inputUserName(name: String, index: Int)
     fun inputTotalMoney(money: String)
     fun inputGroupName(name: String)
-
 }

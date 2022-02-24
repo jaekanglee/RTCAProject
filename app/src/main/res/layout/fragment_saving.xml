@@ -48,12 +48,12 @@
             android:layout_marginEnd="@dimen/dp_16"
             android:hint="계모임 이름"
             android:text="@{viewmodel.groupName}"
-            bind:onChangeGroupName="@{viewmodel}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tb_title"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintVertical_bias="0"
+            bind:onChangeGroupName="@{viewmodel}" />
 
         <TextView
             android:id="@+id/tv_people_count"
@@ -90,10 +90,10 @@
             android:hint="총 금액"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/et_name"
-            bind:onChangeTotalMoney="@{viewmodel}"
             app:layout_constraintStart_toStartOf="@+id/tv_people_count"
             app:layout_constraintTop_toBottomOf="@+id/et_name"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintVertical_bias="0"
+            bind:onChangeTotalMoney="@{viewmodel}" />
 
         <EditText
             android:id="@+id/et_total_period"
@@ -112,7 +112,7 @@
             android:layout_height="0dp"
             android:background="@color/white"
             android:padding="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btn_confirm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_people_count">
@@ -124,6 +124,17 @@
                 android:orientation="vertical" />
         </ScrollView>
 
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_48"
+            android:text="저장하기"
+            android:onClick="@{()->viewmodel.saveRtcaInfo()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
